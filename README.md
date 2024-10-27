@@ -317,8 +317,8 @@ FROM p;
 #### Реляционное исчисление
 
 ```
-(SX.S#, PX.P#,JX.J#) WHERE SX.XCity=PX.City AND
-                     PX.XCity=JX.City AND SX.XCity=JX.City
+(SX.S#, PX.P#,JX.J#) WHERE SX.City=PX.City AND
+                     PX.City=JX.City AND SX.City=JX.City
 ```
 
 #### SQL
