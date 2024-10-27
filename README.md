@@ -364,8 +364,8 @@ WHERE SCity≠Pcity OR
 #### Реляционное исчисление
 
 ```
-(SX.S#, PX.P#,JX.J#) WHERE SX.XCity<>PX.City OR
-PX.XCity<>JX.City OR SX.XCity<>JX.City
+(SX.S#, PX.P#,JX.J#) WHERE SX.City<>PX.City OR
+PX.City<>JX.City OR SX.City<>JX.City
 ```
 
 #### SQL
@@ -397,8 +397,8 @@ WHERE SCity≠Pcity AND
 #### Реляционное исчисление
 
 ```
-(SX.S#, PX.P#,JX.J#) WHERE SX.XCity<>PX.City AND
-PX.XCity<>JX.City AND SX.XCity<>JX.City
+(SX.S#, PX.P#,JX.J#) WHERE SX.City<>PX.City AND
+PX.City<>JX.City AND SX.City<>JX.City
 ```
 
 #### SQL
@@ -823,7 +823,7 @@ WHERE s.status <
 
 ```
 J [J#] MINUS
-((J [J#, City] RENAME City AS Xcity) TIMES J [City])
+((J [J#, City] RENAME City AS XCity) TIMES J [City])
     WHERE XCity>City) [J#]
 ```
 
