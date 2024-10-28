@@ -333,7 +333,7 @@ JOIN j ON p.city = j.city
 AND s.city = j.city;
 ```
 
->[!INFO]
+>[!NOTE]
 >
 >Либо, что то же самое:
 >
@@ -381,7 +381,7 @@ WHERE NOT (s.city = p.city
            AND p.city = j.city);
 ```
 
->[!INFO]
+>[!NOTE]
 >
 >Либо, что то же самое:
 >
