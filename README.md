@@ -304,15 +304,7 @@ FROM p;
 
 #### Реляционная алгебра
 
-`(S JOIN P JOIN J) [S#, P#, J#]`
-
->[!WARNING]
->
->**FIXME**: скорее всего неправильно.
->
->Может быть всё же?
->
->`((S JOIN P) JOIN J) WHERE S.CITY = P.CITY AND P.CITY = J.CITY [S#, P#, J#]`
+`(S JOIN (P JOIN J)) [S#, P#, J#]`
 
 #### Реляционное исчисление
 
