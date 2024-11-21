@@ -480,7 +480,7 @@ WHERE
 
 ```
 ((S RENAME City AS Scity) JOIN SPJ JOIN
-(J RENAME City AS Jcity)) [SCity, JCity]
+(J RENAME City AS Jcity)) {SCity, JCity}
 ```
 
 #### Реляционное исчисление
