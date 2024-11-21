@@ -968,34 +968,22 @@ WHERE NOT EXISTS
        AND NOT (spj.s_id = 'S1'));
 ```
 
-### 7.42 (**ПЕРЕПРОВЕРИТЬ**) Определить номера деталей, поставляемых для лондонских проектов
+### 7.42 Определить номера деталей, поставляемых для лондонских проектов
 
 #### Реляционная алгебра
 
-`(P WHERE (MATCHING SPJ) [J#]>= (J WHERE City='London') [J#]) [P#]`
+`(SPJ JOIN (J WHERE City='London')) [P#]`
 
 #### Реляционное исчисление
 
-```
-PX.P# WHERE FORALL JX
-(IF JX.City='London' THEN
-EXISTS SPJY (SPJY.P#=PX.P# AND SPJY.J#=JX.J#))
-```
+`SPJX.P# WHERE EXISTS JX (JX.J#=SPJX.J# AND JX.City='London')`
 
 #### SQL
 
 ```sql
-SELECT p.p_id
-FROM p
-WHERE NOT EXISTS
-    (SELECT *
-     FROM j
-     WHERE j.city = 'London'
-       AND NOT EXISTS
-         (SELECT *
-          FROM spj
-          WHERE spj.p_id = p.p_id
-            AND spj.j_id = j.j_id));
+SELECT DISTINCT spj.p_id FROM spj
+JOIN j ON spj.j_id = j.j_id
+WHERE j.city = 'London';
 ```
 
 ### 7.43. Установить номера поставщиков одной и той же детали для всех проектов (_SPJ не пустое отношение_)
@@ -1544,19 +1532,11 @@ WHERE NOT EXISTS
      WHERE spj.j_id = j.j_id
        AND NOT (spj.s_id = 'S1'));
 
--- 7.42 (**ПЕРЕПРОВЕРИТЬ**) Определить номера деталей, поставляемых для лондонских проектов
+-- 7.42 Определить номера деталей, поставляемых для лондонских проектов
 
-SELECT p.p_id
-FROM p
-WHERE NOT EXISTS
-    (SELECT *
-     FROM j
-     WHERE j.city = 'London'
-       AND NOT EXISTS
-         (SELECT *
-          FROM spj
-          WHERE spj.p_id = p.p_id
-            AND spj.j_id = j.j_id));
+SELECT DISTINCT spj.p_id FROM spj
+JOIN j ON spj.j_id = j.j_id
+WHERE j.city = 'London';
 
 -- 7.43. Установить номера поставщиков одной и той же детали для всех проектов (*SPJ не пустое отношение*)
 
