@@ -427,21 +427,20 @@ WHERE s.city <> p.city
 
 #### Реляционная алгебра
 
-`(SPJ JOIN (S WHERE City='London')) [P#]`
+`P SEMIJOIN (SPJ SEMIJOIN (S WHERE CITY = London))`
 
 #### Реляционное исчисление
 
-`SPJX.P# WHERE EXISTS SX (SX.S#=SPJX.S# AND SX.City='London')`
+`PX WHERE PX.P# = SPJX.P# AND EXISTS SX (SX.S# = SPJX.S# AND SX.City = 'London')`
 
 #### SQL
 
 ```sql
-SELECT DISTINCT spj.p_id
-FROM spj
-WHERE
-    (SELECT s.city
-     FROM s
-     WHERE s.s_id = spj.s_id) = 'London';
+SELECT DISTINCT p.*
+FROM p
+JOIN spj ON p.p_id = spj.p_id
+JOIN s ON spj.s_id = s.s_id
+WHERE s.city = 'London';
 ```
 
 ### 7.22. Определить номера деталей, поставляемых поставщиком из Лондона для проекта в Лондоне
@@ -1339,12 +1338,11 @@ WHERE s.city <> p.city
 
 -- 7.21. Получить полные сведения о деталях, поставляемых поставщиком из Лондона
 
-SELECT DISTINCT spj.p_id
-FROM spj
-WHERE
-    (SELECT s.city
-     FROM s
-     WHERE s.s_id = spj.s_id) = 'London';
+SELECT DISTINCT p.*
+FROM p
+JOIN spj ON p.p_id = spj.p_id
+JOIN s ON spj.s_id = s.s_id
+WHERE s.city = 'London';
 
 -- 7.22. Определить номера деталей, поставляемых поставщиком из Лондона для проекта в Лондоне
 
